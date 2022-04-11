@@ -1,25 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import React, {useEffect, useState} from 'react';
 
-export default App;
+export default function Dene02() {
+
+  const [text, setText] = useState('');
+    
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    console.log('todos', todos);
+      }, [todos]);
+
+  function handleClick() {
+      const newTodos = [...todos];
+      newTodos.push({id:todos.length+1,name:text});
+      setTodos(newTodos);
+      setText('');
+  }
+
+  function delTodo(id){
+    const newTodos=todos.filter(val => val.id !== id);
+    setTodos(newTodos);
+  }
+
+  const [style, setStyle]= useState('def');
+
+
+  return (
+    <>
+        <input value={text} onChange={e => setText(e.target.value) } />
+        <br />
+        <button onClick={handleClick} disabled={!text}>
+            Ekle
+        </button>
+        <br />
+        <ul>
+        {todos.map(todo => (
+            <li className={style} id={todo.id}>
+                {todo.name}
+                <button onClick={()=>setStyle('done')}>Yapildi</button>
+                <button onClick={()=>delTodo(todo.id)}>Sil</button>
+            </li>
+        ))}
+        </ul>
+    </>
+);
+}
