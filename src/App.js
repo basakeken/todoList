@@ -1,7 +1,7 @@
 import './App.css';
 //uhyyhhhgfhj
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect,useState} from 'react';
 
 export default function Dene02() {
 
@@ -9,13 +9,15 @@ export default function Dene02() {
     
   const [todos, setTodos] = useState([]);
 
+  const [isDone, setDone] = useState('no');
+
   useEffect(() => {
     console.log('todos', todos);
       }, [todos]);
 
   function handleClick() {
       const newTodos = [...todos];
-      newTodos.push({id:todos.length+1,name:text});
+      newTodos.push({id:todos.length+1,name:text,done:isDone});
       setTodos(newTodos);
       setText('');
   }
@@ -25,26 +27,44 @@ export default function Dene02() {
     setTodos(newTodos);
   }
 
-  const [style, setStyle]= useState('def');
+  const [style,setStyle]=useState('def');
 
 
-  return (
+  function doTask(id){
+        for(const todo in todos){
+          if (todo.id===id){
+            setStyle('completed');
+            setDone('yes');
+          }
+        }
+    }
+
+  function temizle(){
+    const newTodos=todos.filter(val => val.done === 'yes');
+    setTodos(newTodos);
+  }
+  
+
+  return(
     <>
+        <h3>todo list 🤯</h3>
         <input value={text} onChange={e => setText(e.target.value) } />
         <br />
         <button onClick={handleClick} disabled={!text}>
             Ekle
         </button>
-        <br />
+        <button onClick={temizle}>
+          Temizle
+        </button>
         <ul>
         {todos.map(todo => (
             <li className={style} id={todo.id}>
                 {todo.name}
-                <button onClick={()=>setStyle('done')}>Yapildi</button>
-                <button onClick={()=>delTodo(todo.id)}>Sil</button>
+                <br></br><button onClick={()=>doTask(todo.id)}>Yap</button> 
+                <br></br><button onClick={()=>delTodo(todo.id)}>Sil</button>
             </li>
         ))}
         </ul>
     </>
-);
-}
+)
+      }

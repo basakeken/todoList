@@ -37,6 +37,9 @@
   }
 }
 
-.done{
+.def{
+  font-weight: bold;
+}
+.completed{
   text-decoration: line-through;
 }
