@@ -9,15 +9,13 @@ export default function Dene02() {
     
   const [todos, setTodos] = useState([]);
 
-  const [isDone, setDone] = useState('no');
-
   useEffect(() => {
     console.log('todos', todos);
       }, [todos]);
 
   function handleClick() {
       const newTodos = [...todos];
-      newTodos.push({id:todos.length+1,name:text,done:isDone});
+      newTodos.push({id:todos.length+1,name:text,done:false});
       setTodos(newTodos);
       setText('');
   }
@@ -27,20 +25,21 @@ export default function Dene02() {
     setTodos(newTodos);
   }
 
-  const [style,setStyle]=useState('def');
-
-
+    
   function doTask(id){
-        for(const todo in todos){
-          if (todo.id===id){
-            setStyle('completed');
-            setDone('yes');
-          }
-        }
+    const newTodos = [];
+    for(const todo of todos){
+      if (todo.id===id){
+        newTodos.push({...todo, done: true});
+      }
+      else{
+        newTodos.push(todo);
     }
+    setTodos(newTodos)}
+  }
 
   function temizle(){
-    const newTodos=todos.filter(val => val.done === 'yes');
+    const newTodos=todos.filter(val => val.done !== true);
     setTodos(newTodos);
   }
   
@@ -58,7 +57,7 @@ export default function Dene02() {
         </button>
         <ul>
         {todos.map(todo => (
-            <li className={style} id={todo.id}>
+            <li className={todo.done ? 'done' : ''} id={todo.id}>
                 {todo.name}
                 <br></br><button onClick={()=>doTask(todo.id)}>Yap</button> 
                 <br></br><button onClick={()=>delTodo(todo.id)}>Sil</button>
