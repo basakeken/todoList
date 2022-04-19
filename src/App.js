@@ -28,14 +28,8 @@ export default function Dene02() {
     
   function doTask(id){
     const newTodos = [];
-    for(const todo of todos){
-      if (todo.id===id){
-        newTodos.push({...todo, done: true});
-      }
-      else{
-        newTodos.push(todo);
-    }
-    setTodos(newTodos)}
+    todos.map(todo => todo.id===id ? newTodos.push({...todo, done: true}) : newTodos.push(todo) );
+    setTodos(newTodos);
   }
 
   function temizle(){

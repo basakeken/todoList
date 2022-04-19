@@ -1,0 +1,4 @@
+* doTask da map kullanalım.
+* delTodo'da silmek istediğinizden emin misiniz diye confirm edip silsin.
+* 1. ve 2. task eklenip 1. silinince 3. eklenince kalan 2 todo'nun id'leri 2 oluyor. Unique olarak id üretmen gerekiyor.
+* Todos'u LocalStorage'a saklayalım ki, tarayıcıyı tekrar açtığımızda hatırlasın: https://javascript.info/localstorage
