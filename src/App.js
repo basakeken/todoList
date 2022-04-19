@@ -9,15 +9,19 @@ export default function Dene02() {
     
   const [todos, setTodos] = useState([]);
 
+  const [taskId, setId] = useState(todos.length+1);
+
   useEffect(() => {
     console.log('todos', todos);
       }, [todos]);
-
+  
+  
   function handleClick() {
       const newTodos = [...todos];
-      newTodos.push({id:todos.length+1,name:text,done:false});
+      newTodos.push({id:taskId,name:text,done:false});
       setTodos(newTodos);
       setText('');
+      setId(taskId+1);
   }
 
   function delTodo(id){
