@@ -54,7 +54,10 @@ export default function Dene02() {
             <li className={todo.done ? 'done' : ''} id={todo.id}>
                 {todo.name}
                 <br></br><button onClick={()=>doTask(todo.id)}>Yap</button> 
-                <br></br><button onClick={()=>delTodo(todo.id)}>Sil</button>
+                <br></br><button onClick={()=> {
+                  const onay = window.confirm('Silmek istediginize emin misiniz?')
+                  if (onay){delTodo(todo.id)}
+                }}>Sil</button>
             </li>
         ))}
         </ul>
