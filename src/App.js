@@ -6,10 +6,13 @@ import React, { useEffect,useState} from 'react';
 export default function Dene02() {
 
   const [text, setText] = useState('');
-    
-  const [todos, setTodos] = useState([]);
+  
+  const [todos, setTodos] = useState(()=>{const localTodos = localStorage.getItem('todos'); return localTodos ? JSON.parse(localTodos) : [] });
 
   const [taskId, setId] = useState(todos.length+1);
+
+  useEffect(()=> {
+    localStorage.setItem('todos',JSON.stringify(todos))}, [todos]);
 
   useEffect(() => {
     console.log('todos', todos);
